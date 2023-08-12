@@ -2,6 +2,33 @@ let keys = document.getElementsByClassName('key');
 let allKeys = [];
 let memo = [];
 
+function throttle(func, wait) {
+    let ready = true;
+    let args = null;
+
+    return function throttled() {
+        let context = this;
+        if (ready) {
+            ready = false;
+            setTimeout(function () {
+                ready = true;
+                if (args) {
+                    throttled.apply(context);
+                }
+            }, wait);
+
+            if (args) {
+                func.apply(this, args);
+                args = null;
+            } else {
+                func.apply(this, arguments);
+            }
+        } else {
+            args = arguments;
+        }
+    };
+}
+
 function compileKey(key) {
     const prev = key.previousElementSibling;
     const next = key.nextElementSibling;
@@ -95,11 +122,17 @@ function updateTouches(e) {
             }
         }
 
+        if (keyFlags !== lastState) {
+            throttledSendKeys(keyFlags);
+        }
+
         lastState = keyFlags;
     } catch (err) {
         alert(err);
     }
 }
+
+const throttledUpdateTouches = throttle(updateTouches, 10);
 
 function setKey(keyFlags, kflag) {
     let idx = kflag;
@@ -145,6 +178,8 @@ function sendKeys(keyFlags) {
         ws.send('b' + keyFlags.join(''));
     }
 }
+
+const throttledSendKeys = throttle(sendKeys, 10);
 
 const fs = document.getElementById('fullscreen');
 
