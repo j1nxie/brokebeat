@@ -1,0 +1,42 @@
+#fullscreen {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    background: #000000;
+    color: hotpink;
+}
+
+.container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    flex-flow: column nowrap;
+    touch-action: none;
+    align-items: stretch;
+}
+
+.row-container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    flex: 1;
+}
+
+.column-container {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    flex: 1;
+}
+
+.key {
+    flex: 1;
+    border: 1px solid green;
+}
