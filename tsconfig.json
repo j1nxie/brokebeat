@@ -1,0 +1,8 @@
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "outDir": "dist",
+    }
+}
