@@ -112,11 +112,15 @@ appWs.app.ws("/ws", (ws: any, _: any) => {
             // send key according to keycode
             // https://github.com/node-ffi-napi/node-ffi-napi is a viable solution
             let keyFlag = parseInt(msg.substring(1));
-            if (keyFlag >= 0 && keyFlag <= 4) {
-                KeyTap(keyFlag + 49);
-            } else {
-                KeyTap((keyFlag - 4) + 65);
+            for (let i = 0; i < 16; i++) {
+                if (((keyFlag & (1 << i)) === 0)) {
+                    if (i >= 0 && i <= 4) {
+                        KeyTap(i + 49);
+                    } else {
+                        KeyTap((i - 4) + 65);
+                    }
+                }
             }
         }
+    }
     })
-})
