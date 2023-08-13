@@ -113,7 +113,7 @@ appWs.app.ws("/ws", (ws: any, _: any) => {
             // https://github.com/node-ffi-napi/node-ffi-napi is a viable solution
             let keyFlag = parseInt(msg.substring(1));
             for (let i = 0; i < 16; i++) {
-                if (((keyFlag & (1 << i)) === 0)) {
+                if (((keyFlag & (1 << i)) !== 0)) {
                     if (i >= 0 && i <= 4) {
                         KeyTap(i + 49);
                     } else {
