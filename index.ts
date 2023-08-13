@@ -111,7 +111,7 @@ appWs.app.ws("/ws", (ws: any, _: any) => {
             // process key
             // send key according to keycode
             // https://github.com/node-ffi-napi/node-ffi-napi is a viable solution
-            let keyFlag = parseInt(msg.substring(1));
+            let keyFlag = parseInt(msg.substring(1), 2);
             for (let i = 0; i < 16; i++) {
                 if (((keyFlag & (1 << i)) !== 0)) {
                     if (i >= 0 && i <= 4) {
